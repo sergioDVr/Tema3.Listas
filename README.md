@@ -1,5 +1,5 @@
 # Tema3.Listas
-version 3.0
+version 3.1
     
-       Encapsulamos las propiedades de la lista con objetos e incorporamos los errores con un Objeto Error.
-       Implementamos tambien la lista ordenada con Objetos.
+       Hemos tendio que mejorar el metodo indexOf en las listas con objetos, al encapsular las propiedades de persona no podiamos acceder bien.
+       Hemos modificado el metodo add de la lista ordenda para que ordene independientemente sean mayusculas o minusculas.

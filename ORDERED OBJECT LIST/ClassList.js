@@ -6,8 +6,8 @@ function Person(name, surname) {
     this.toString = function () {
         return "El nombre: " + name + ", apellido: " + surname;
     }
-    Object.defineProperty(this, "name", { get: function () { return name; } });
-    Object.defineProperty(this, "surname", { get: function () { return surname; } });
+    Object.defineProperty(this, "valueName", { get: function () { return name; } });
+    Object.defineProperty(this, "valueSurname", { get: function () { return surname; } });
 }
 function MyError(message) {
     this.name = 'Error lista';
@@ -35,19 +35,12 @@ function ListaObjetos() {
 
         list.push(person);
         list.sort(function (a,b) {
-
-            if(a.name==b.name){
-
-                return a.surname>b.surname;
-
+            if(a.valueName.toLocaleLowerCase() ==b.valueName.toLocaleLowerCase() ){
+                return a.valueSurname.toLocaleLowerCase()>b.valueSurname.toLocaleLowerCase();
             }else{
-
-                return a.name>b.name;
-
+                return a.valueName.toLocaleLowerCase() >b.valueName.toLocaleLowerCase() ;
             }
-
-        })
-
+        });
         return this.size();
     }
     this.get = function (index) {
@@ -64,7 +57,7 @@ function ListaObjetos() {
     this.indexOf = function (persona) {
         if(! persona instanceof Person) throw new MyError("El objeto no es una persona");
         return list.findIndex(function (t, index) {
-            if (t.name == persona.name && t.surname == persona.surname) {
+            if (t.valueName == persona.valueName && t.valueSurname == persona.valueSurname) {
                 return t;
             }
         })
@@ -72,7 +65,7 @@ function ListaObjetos() {
     this.lastIndexOf = function (persona) {
         if(! persona instanceof Person) throw new MyError("El objeto no es una persona");
         for (var i = list.length - 1; i > 0; i--) {
-            if (list[i].name == persona.name && list[i].surname == persona.surname) {
+            if (list[i].valueName == persona.valueName && list[i].valueSurname == persona.valueSurname) {
                 return i;
             }
         }
@@ -98,12 +91,12 @@ function ListaObjetos() {
     }
     this.removeElement = function (persona) {
         if(! persona instanceof Person) throw new MyError("El objeto no es una persona");
-        var index = list.indexOf(persona);
+        var index = this.indexOf(persona);
 
         if (index == -1) {
             return false;
         } else {
-            while ((index = list.indexOf(persona)) !== -1) {
+            while ((index = this.indexOf(persona)) !== -1) {
                 list.splice(index, 1);
             }
             return true;
