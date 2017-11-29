@@ -15,17 +15,6 @@
 
     <button id="pushButton" onclick="pushPersona(document.getElementById ('name').value,document.getElementById ('ape').value);">Añadir Persona</button>
     <br>
-    Introduce una persona por Index: <br/>
-    <label for="name">Nombre:</label>
-    <input type="text" id="name2" placeholder="Nombre"><br>
-    <label for="ape">Apellido:</label>
-    <input type="text" id="ape2" placeholder="Apellidos"><br>
-    <input type="text" id="index" value="" placeholder="Index">
-    <button id="pushAtIndexButton"
-            onclick="pushPersonAtIndex(new Person(document.getElementById ('name2').value,document.getElementById ('ape2').value), document.getElementById('index').value)">
-        Añade una persona por Index
-    </button>
-    <br>
     <input type="text" id="indexGet" value="" placeholder="Index">
     <button id="getIndexButton" onclick="personGet(document.getElementById('indexGet').value)">Pulsa para ver un valor
         de la lista por index
@@ -40,14 +29,6 @@
     <input type="text" id="ape3" value="" placeholder="Persona">
     <button id="removeElementIndexButton" onclick="PersonRemoveElement(new Person(document.getElementById ('name3').value,document.getElementById ('ape3').value))">Borra
         persona por Elemento
-    </button>
-    <br>
-    <input type="text" id="name4" value="" placeholder="Nombre">
-    <input type="text" id="ape4" value="" placeholder="Persona">
-    <input type="text" id="index3" value="" placeholder="Index">
-    <button id="setElementIndexButton"
-            onclick="PersonSet(new Person(document.getElementById ('name4').value,document.getElementById ('ape4').value),document.getElementById('index3').value)">Cambiar
-        Cambiar persona(index) por persona indicada.
     </button>
     <br/>
     <button id="clearList" onclick="clearList()">Borrar toda la lista</button>

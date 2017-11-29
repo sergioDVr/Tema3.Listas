@@ -6,6 +6,8 @@ function Person(name, surname) {
     this.toString = function () {
         return "El nombre: " + name + ", apellido: " + surname;
     }
+    Object.defineProperty(this, "name", { get: function () { return name; } });
+    Object.defineProperty(this, "surname", { get: function () { return surname; } });
 }
 function MyError(message) {
     this.name = 'Error lista';
@@ -32,15 +34,19 @@ function ListaObjetos() {
         if (this.isFull(list)) throw new MyError("La lista esta llena");
 
         list.push(person);
+        list.sort(function (a,b) {
 
-        return this.size();
-    }
-    this.addAt = function (persona, index) {
-        if(! persona instanceof Person) throw new MyError("El objeto no es una persona");
-        if (this.isFull(list)) throw new MyError("La lista esta llena");
-        if (isNaN(index)) throw new MyError("El index no es un entero");
+            if(a.name==b.name){
 
-        list.splice(index, 0, persona);
+                return a.surname>b.surname;
+
+            }else{
+
+                return a.name>b.name;
+
+            }
+
+        })
 
         return this.size();
     }
@@ -103,16 +109,6 @@ function ListaObjetos() {
             return true;
         }
     }
-    this.set = function (persona, index) {
-        if(! persona instanceof Person) throw new MyError("El objeto no es una persona");
-        if (index < 0 || index > this.size()) throw new MyError("El indice esta fuera del tamaño de la lista");
-
-        var aDevolver=list[index]=persona;
-        list[index]=persona;
-        return aDevolver;
-    }
-
-
 }
 
 //Probando metodos.
@@ -133,11 +129,6 @@ console.log("Esta vacia la lista : " + lista.isEmpty());
 console.log("Esta llena la lista: " + lista.isFull());
 console.log("Tamaño de la lista: " + lista.size());
 
-//Añadimos personas por index.
-
-console.log("Tamaño de la lista, metemos a Juana en la posicion 3: " + lista.addAt(new Person("Juana", "Asecas"), 3));
-console.log("Tamaño de la lista, metemos a mario en la posicion 0: " + lista.addAt(new Person("Mario", "Lupas"), 0));
-
 //Mostramos la lista
 
 console.log(lista.toString());
@@ -145,9 +136,6 @@ console.log(lista.toString());
 console.log("La posicion 3 contiene la persona: " + lista.get(3).toString());
 
 console.log("La primera posicion para una persona llamada Ramiro y de apellido Peñal es : " + lista.indexOf(new Person("Ramiro", "Peñal")));
-
-//metemos un ramiro en las posiciones mas ultimas para probar el lastindexof:
-lista.addAt(new Person("Ramiro", "Peñal"), 6)
 console.log("La primera ultima posicion para una persona llamada Ramiro y de apellido Peñal es : " + lista.lastIndexOf(new Person("Ramiro", "Peñal")));
 console.log("La capacidad es de: " + lista.capacity());
 
@@ -158,6 +146,4 @@ console.log(lista.toString());
 console.log("Borramos las personas de nombre Ramiro Peñal: " + lista.removeElement(new Person("Ramiro", "Peñal")));
 console.log(lista.toString());
 //cambiamos una la persona de la posicion 0 por Alfonso Ortega.
-
-console.log(lista.set(new Person("Alfonso", "Ortega"),0));
 console.log(lista.toString());
